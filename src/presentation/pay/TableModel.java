@@ -12,7 +12,7 @@ public class TableModel extends AbstractTableModel {
     String[] nombCols ={"MENSUALIDAD","SALDO","INTERES","AMORTIZACION" };
 
     public TableModel(List<Pago> filas) {
-        this.filas =new ArrayList<>();
+        this.filas =filas;
     }
 
     @Override

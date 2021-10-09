@@ -75,6 +75,7 @@ public class XMLPersister {
             // Recorro las etiquetas
             for (int i = 0; i < lista.getLength(); i++) {
                 // Cojo el nodo actual
+                //System.out.println(i);
                 Node elemento = lista.item(i);
                 // Compruebo si el nodo es un elemento
                 if (elemento.getNodeType()==Node.ELEMENT_NODE) {
@@ -82,42 +83,34 @@ public class XMLPersister {
                     NodeList provincias = e.getChildNodes();
 
                     // Lo transformo a Element
-                    for (int j = 0; j < provincias.getLength();j++) {
+                    for (int j = 0; j < provincias.getLength(); j++) {
                         Node provincia = provincias.item(j);
-                        if (provincia.getNodeType()==Node.ELEMENT_NODE) {
-                            if(provincia.getNodeName().equals("nombre")) {
-                                Servicio.instance().getProvincias().add(new Provincia(String.valueOf(contProvincia),provincia.getTextContent()));
-                                contProvincia+=1;
+                        if (provincia.getNodeType() == Node.ELEMENT_NODE) {
+                            if (provincia.getNodeName().equals("nombre")) {
+                                Servicio.instance().getProvincias().add(new Provincia(String.valueOf(contProvincia), provincia.getTextContent()));
+                                contProvincia += 1;
                             }
                             Element e2 = (Element) provincia;
-                            NodeList cantones= e2.getChildNodes();
-                            for(int z=0;z<cantones.getLength();z++){
-                                Node canton=cantones.item(z);
-                                if(canton.getNodeType()==Node.ELEMENT_NODE){
-                                    if(canton.getNodeName().equals("nombre")) {
-//                                        Servicio.instance().addCanton(elemento.getNodeName(),new Canton("", canton.getTextContent()));
-//                                        System.out.println(provincia.getTextContent());
+                            NodeList cantones = e2.getChildNodes();
+                            for (int z = 0; z < cantones.getLength(); z++) {
+                                Node canton = cantones.item(z);
+                                if (canton.getNodeType() == Node.ELEMENT_NODE) {
+                                    if (canton.getNodeName().equals("nombre")) {
                                         Servicio.instance().getProvincias().get(i).getListaCantones().add(new Canton(String.valueOf(contCantones), canton.getTextContent()));
-                                        contCantones+=1;
+                                        contCantones += 1;
                                     }
-                                    Element d=(Element) canton;
-                                    NodeList distritos=d.getChildNodes();
-                                    for(int k=0;k<distritos.getLength();k++){
-                                        Node distrito=distritos.item(k);
-                                        if(distrito.getNodeType()==Node.ELEMENT_NODE){
-                                            if(distrito.getNodeName().equals("nombre")) {
-                                            //AGREGAR DISTRITO
-                                                //System.out.println(distrito.getTextContent());
-                                               // System.out.println(provincia.);
-                                                try {
-                                                    for(int p=0;p<Servicio.instance().getProvincias().get(i).getListaCantones().size();p++) {
-                                                        Servicio.instance().getProvincias().get(i).getListaCantones().get(p).getListaDistritos().add(new Distrito("", distrito.getTextContent()));
-                                                    }
-                                                }catch (Exception m){
-                                                    m.getMessage();
-                                                }
+                                    Element d = (Element) canton;
+                                    NodeList distritos = d.getChildNodes();
+                                    for (int k = 0; k < distritos.getLength(); k++) {
+                                        Node distrito = distritos.item(k);
+                                        if (distrito.getNodeType() == Node.ELEMENT_NODE) {
+                                            if (distrito.getNodeName().equals("nombre")) {
+                                                    for (int p = 0; p < Servicio.instance().getProvincias().get(i).getListaCantones().size(); p++) {
 
-                                                }
+                                                        Servicio.instance().getProvincias().get(i).buscarCanton(p).getListaDistritos().add(new Distrito("", distrito.getTextContent()));
+                                                    }
+
+                                            }
                                         }
 
                                     }
@@ -128,12 +121,14 @@ public class XMLPersister {
                         }
 
                     }
+
                 }
 
             }
-            System.out.println(Servicio.instance().getProvincias().toString());
+
+           // System.out.println(Servicio.instance().getProvincias().toString());
         }catch (Exception e){
-            e.printStackTrace();
+          //  e.printStackTrace();
         }
     }
 }

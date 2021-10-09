@@ -1,5 +1,7 @@
 package presentation.pay;
 
+import logic.Pago;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -11,6 +13,7 @@ public class Vista extends JFrame implements Observer {
     private Modelo modelo;
     private JPanel principal;
     private JButton regresar;
+    private JTable tabla;
 
     public Controlador getControlador() {
         return controlador;
@@ -44,7 +47,9 @@ public class Vista extends JFrame implements Observer {
         regresar.setActionCommand("regresar-pago");
         principal.setBackground(new Color(176,196,222));
         principal.add(regresar);
+        tabla=new JTable();
         contentPane.setBackground(new Color(176,196,222));
+        contentPane.add(tabla,BorderLayout.CENTER);
         contentPane.add(principal,BorderLayout.SOUTH);
     }
     public void agregarListener(ActionListener actionListener){
@@ -55,6 +60,17 @@ public class Vista extends JFrame implements Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-
+        Pago pago=new Pago();
+        modelo.setPago(pago);
+        tabla.setModel(modelo.getTabla());
     }
+
+    public void agregaTabla(JScrollPane jScrollPane1) {
+        if(getContentPane().getComponentCount()>0){
+            getContentPane().remove(0);
+        }
+        getContentPane().add(jScrollPane1);
+        getContentPane().validate();
+    }
+
 }

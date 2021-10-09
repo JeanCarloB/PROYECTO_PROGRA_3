@@ -12,7 +12,7 @@ public class TableModel extends AbstractTableModel {
 
 
     public TableModel(List<Prestamo> filas) {
-        this.filas =new ArrayList<>();
+        this.filas =filas;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TableModel extends AbstractTableModel {
             case 0: return prestamo.getMonto();
             case 1: return prestamo.getTasaInteres();
             case 2: return prestamo.getPlazo();
-            default: return null;
+            default: return "";
         }
     }
 

@@ -22,6 +22,7 @@ public class Modelo extends Observable {
         lista=new ArrayList<>();
         table=new TableModel(lista);
         cliente=new Cliente();
+        cliente.getListaPrestamos().add(new Prestamo(00,0,0));
         pago=new Pago();
         editable=false;
         nuevoPrestamo=new Prestamo();
@@ -33,7 +34,7 @@ public class Modelo extends Observable {
     }
 
     public void setTable(TableModel table) {
-        this.table = table;
+        this.table = new TableModel(cliente.getListaPrestamos());
     }
 
     public Cliente getCliente() {
@@ -76,14 +77,6 @@ public class Modelo extends Observable {
         this.nuevoPrestamo = nuevoPrestamo;
     }
 
-
-    public TableModel getTablePago() {
-        return tablePrestamo;
-    }
-
-    public void setTablePago(TableModel tablePago) {
-        this.tablePrestamo = tablePago;
-    }
 
     @Override
     public synchronized void addObserver(Observer o) {

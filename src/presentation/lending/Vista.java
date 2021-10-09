@@ -5,20 +5,34 @@ import logic.Pago;
 import logic.Prestamo;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Vista extends JFrame implements Observer {
-    Modelo modelo;
-    Controlador controlador;
+    private Modelo modelo;
+    private Controlador controlador;
+    private JPanel sur;
+    private JPanel norte;
+    private JButton pago;
+    private JLabel monto;
+    private JLabel plazo;
+    private JLabel tasaInteres;
+    private JTextField textoMonto;
+    private JTextField textoPlazo;
+    private JTextField textoTasaInteres;
+    private JButton agregar;
+    private JButton regresar;
+    private JTable tabla;
 
     public Modelo getModelo() {
         return modelo;
     }
 
     public void setModelo(Modelo modelo) {
+        modelo.addObserver(this);
         this.modelo = modelo;
     }
 
@@ -30,10 +44,7 @@ public class Vista extends JFrame implements Observer {
         this.controlador = controlador;
     }
 
-    JPanel principal;
-    JButton pago;
-    JButton regresar;
-    JTable tabla;
+
     public Vista() throws HeadlessException {
         setTitle("Prestamos");
         setSize(700,700);
@@ -44,19 +55,45 @@ public class Vista extends JFrame implements Observer {
     }
 
     private void iniciarComponentes(Container contentPane) {
-        principal=new JPanel(new FlowLayout());
+        sur=new JPanel(new FlowLayout());
+        norte=new JPanel(new GridLayout(3,3));
+        monto=new JLabel("Monto");
+        plazo=new JLabel("Tasa de interes");
+        tasaInteres=new JLabel("Plazo");
+        textoMonto=new JTextField(10);
+        textoPlazo=new JTextField(10);
+        textoTasaInteres=new JTextField(10);
+        agregar=new JButton("Agregar");
+        agregar.setActionCommand("agregar-leading");
+
+        norte.add(monto);
+        norte.add(textoMonto);
+        norte.add(agregar);
+        norte.add(tasaInteres);
+        norte.add(textoTasaInteres);
+        norte.add(new JLabel(""));
+        norte.add(plazo);
+        norte.add(textoPlazo);
+        norte.add(new JLabel(""));
+        norte.setBorder(new EmptyBorder(10,10,10,10));
+        norte.setBackground(new Color(176,196,222));
+
+
+
+
         regresar=new JButton("Regresar");
         pago=new JButton("Pagar");
         tabla=new JTable();
+        tabla.setBackground(new Color(176,196,222));
         regresar.setActionCommand("regresar-prestamo");
         pago.setActionCommand("pagar-prestamo");
-        principal.setBackground(new Color(176,196,222));
-        principal.add(regresar);
-        principal.add(pago);
-        principal.add(tabla);
+        sur.setBackground(new Color(176,196,222));
+        sur.add(regresar);
+        sur.add(pago);
         contentPane.setBackground(new Color(176,196,222));
-
-        contentPane.add(principal,BorderLayout.SOUTH);
+        contentPane.add(tabla,BorderLayout.CENTER);
+        contentPane.add(sur,BorderLayout.SOUTH);
+        contentPane.add(norte,BorderLayout.NORTH);
     }
     public void agregarListener(ActionListener actionListener){
         regresar.addActionListener(actionListener);
@@ -74,5 +111,15 @@ public class Vista extends JFrame implements Observer {
         modelo.setPago(pago);
         Cliente cliente=new Cliente();
         modelo.setCliente(cliente);
+        this.tabla.setModel(modelo.getTable());
     }
+
+    public void agregaTabla(JScrollPane jScrollPane1) {
+            if(getContentPane().getComponentCount()>0){
+                getContentPane().remove(0);
+            }
+            getContentPane().add(jScrollPane1);
+            getContentPane().validate();
+        }
+
 }

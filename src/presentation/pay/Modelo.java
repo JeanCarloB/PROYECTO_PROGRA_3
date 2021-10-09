@@ -51,7 +51,7 @@ public class Modelo extends Observable {
     }
 
     public void setTabla(TableModel tabla) {
-        this.tabla = tabla;
+        this.tabla = new TableModel(listaPagos);
     }
 
     public boolean isEditar() {
