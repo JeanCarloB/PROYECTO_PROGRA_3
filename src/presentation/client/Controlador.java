@@ -24,32 +24,14 @@ public class Controlador {
         this.vista = vista;
         modelo.setListaClientes(Servicio.instance().getClientes());
         vista.agregarListener(new Listener());
-        vista.addMouseListenerCombo(new MouseListener() {
+        vista.addActionListenerCombo(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
+            public void actionPerformed(ActionEvent e) {
+                //System.out.println("Action listener");
+                vista.cantonesMatchDistritos();
             }
         });
+
 
         vista.addMouseListenerImagen(new MouseListener() {
             @Override

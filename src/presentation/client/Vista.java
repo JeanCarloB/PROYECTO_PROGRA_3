@@ -214,6 +214,10 @@ public class Vista extends JFrame implements Observer {
         opcionesCanton.addMouseListener(mouseListener);
         opcionesDistrito.addMouseListener(mouseListener);
     }
+    public void addActionListenerCombo(ActionListener actionListener) {
+        opcionesCanton.addActionListener(actionListener);
+        opcionesDistrito.addActionListener(actionListener);
+    }
     public void addMouseMotionListenerImagen(MouseMotionAdapter motionAdapter) {
         imagen.addMouseMotionListener(motionAdapter);
     }
@@ -323,9 +327,9 @@ public class Vista extends JFrame implements Observer {
         ArrayList<String> distritosList = new ArrayList<>();
         String canton = (String) getCantonesCombo();
         for (int j = 0; j < 7; j++) {
-            ArrayList<String> stringArrayList = Servicio.instance().getProvincias().get(j).nombresCantones();
-            for (int i = 0; i < stringArrayList.size(); i++) {
-                if (Objects.equals(stringArrayList.get(i), canton)) {
+            ArrayList<String> nombresCantones = Servicio.instance().getProvincias().get(j).nombresCantones();
+            for (int i = 0; i < nombresCantones.size(); i++) {
+                if (nombresCantones.get(i).equals(canton)) {
                     distritosList = Servicio.instance().buscarProvincia(j).getListaCantones().get(i).nombresDistritos();// error linea 77
 
                 }
