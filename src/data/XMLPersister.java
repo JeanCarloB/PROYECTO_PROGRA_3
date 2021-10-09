@@ -99,7 +99,6 @@ public class XMLPersister {
 //                                        System.out.println(provincia.getTextContent());
                                         Servicio.instance().getProvincias().get(i).getListaCantones().add(new Canton(String.valueOf(contCantones), canton.getTextContent()));
                                         contCantones+=1;
-                                        int v=i;
                                     }
                                     Element d=(Element) canton;
                                     NodeList distritos=d.getChildNodes();
@@ -117,21 +116,22 @@ public class XMLPersister {
                                                 }catch (Exception m){
                                                     m.getMessage();
                                                 }
-                                                // Servicio.instance().getProvincias().get(i).getListaCantones().add(new Canton(String.valueOf(contCantones), canton.getTextContent()));
-
 
                                                 }
                                         }
+
                                     }
                                 }
+
                             }
 
                         }
+
                     }
                 }
 
             }
-            //System.out.println(Servicio.instance().provinciasGetList());
+            System.out.println(Servicio.instance().getProvincias().toString());
         }catch (Exception e){
             e.printStackTrace();
         }

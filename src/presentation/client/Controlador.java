@@ -6,9 +6,7 @@ import logic.Servicio;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EventListener;
+import java.util.*;
 import java.util.List;
 
 public class Controlador {
@@ -19,13 +17,12 @@ public class Controlador {
         return verdad;
     }
 
-    boolean verdad = true;
+    boolean verdad = false;
 
     public Controlador(Modelo modelo, Vista vista) {
         this.modelo = modelo;
         this.vista = vista;
         modelo.setListaClientes(Servicio.instance().getClientes());
-        matchProvincias();
         vista.agregarListener(new Listener());
         vista.addMouseListenerCombo(new MouseListener() {
             @Override
@@ -57,68 +54,102 @@ public class Controlador {
         vista.addMouseListenerImagen(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Rectangle[] Coordenadas = vista.creaCoordenada();
+                if(verdad) {
+                    Rectangle[] Coordenadas = vista.creaCoordenada();
 
-                int mouseX = e.getX();
-                int mouseY = e.getY();
+                    int mouseX = e.getX();
+                    int mouseY = e.getY();
 
-                Coordenadas[0] = new Rectangle(234, 62, 29, 53);
-                Coordenadas[1] = new Rectangle(257, 142, 30, 23);
-                Coordenadas[2] = new Rectangle(66, 75, 79, 38);
-                Coordenadas[3] = new Rectangle(157, 42, 62, 36);
-                Coordenadas[4] = new Rectangle(269, 97, 49, 30);
-                Coordenadas[5] = new Rectangle(315, 171, 57, 28);
-                Coordenadas[6] = new Rectangle(119, 139, 19, 23);
-                Coordenadas[7] = new Rectangle(295, 229, 80, 34);
-                Coordenadas[8] = new Rectangle(195, 148, 48, 23);
-                Coordenadas[9] = new Rectangle(160, 113, 10, 10);
-                Coordenadas[10] = new Rectangle(274, 187, 20, 30);
-                Coordenadas[11] = new Rectangle(220, 180, 10, 10);
+                    Coordenadas[0] = new Rectangle(234, 62, 29, 53);
+                    Coordenadas[1] = new Rectangle(257, 142, 30, 23);
+                    Coordenadas[2] = new Rectangle(66, 75, 79, 38);
+                    Coordenadas[3] = new Rectangle(157, 42, 62, 36);
+                    Coordenadas[4] = new Rectangle(269, 97, 49, 30);
+                    Coordenadas[5] = new Rectangle(315, 171, 57, 28);
+                    Coordenadas[6] = new Rectangle(119, 139, 19, 23);
+                    Coordenadas[7] = new Rectangle(295, 229, 80, 34);
+                    Coordenadas[8] = new Rectangle(195, 148, 48, 23);
+                    Coordenadas[9] = new Rectangle(160, 113, 10, 10);
+                    Coordenadas[10] = new Rectangle(274, 187, 20, 30);
+                    Coordenadas[11] = new Rectangle(220, 180, 10, 10);
 
-                if (Coordenadas[0].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia4.jpg");
-                    ;
-                }
-                if (Coordenadas[1].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia3.jpg");
-                    ;
-                }
-                if (Coordenadas[2].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia5.jpg");
-                    ;
-                }
-                if (Coordenadas[3].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia2.jpg");
-                    ;
-                }
-                if (Coordenadas[4].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia7.jpg");
-                    ;
-                }
-                if (Coordenadas[5].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia7.jpg");
-                    ;
-                }
-                if (Coordenadas[6].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia6.jpg");
-                    ;
-                }
-                if (Coordenadas[7].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia6.jpg");
-                    ;
-                }
-                if (Coordenadas[8].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia1.jpg");
-                    ;
-                }
-                if (Coordenadas[9].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia6.jpg");
-                }
-                if (Coordenadas[10].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia1.jpg");
-                }
-                if (Coordenadas[11].contains(mouseX, mouseY)) {
-                    vista.setearRuta("src/map/provincia6.jpg");
+                    if (Coordenadas[0].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia4.jpg");
+                        vista.getTextFieldProvincia().setText("Heredia");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[1].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia3.jpg");
+                        vista.getTextFieldProvincia().setText("Cartago");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[2].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia5.jpg");
+                        vista.getTextFieldProvincia().setText("Guanacaste");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+
+                    }
+                    if (Coordenadas[3].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia2.jpg");
+                        vista.getTextFieldProvincia().setText("Alajuela");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[4].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia7.jpg");
+                        vista.getTextFieldProvincia().setText("Limón");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[5].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia7.jpg");
+                        vista.getTextFieldProvincia().setText("Limón");
+                    }
+                    if (Coordenadas[6].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia6.jpg");
+                        vista.getTextFieldProvincia().setText("Puntarenas");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+
+                    }
+                    if (Coordenadas[7].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia6.jpg");
+                        vista.getTextFieldProvincia().setText("Puntarenas");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[8].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia1.jpg");
+                        vista.getTextFieldProvincia().setText("San José");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+                    }
+                    if (Coordenadas[9].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia6.jpg");
+                        vista.getTextFieldProvincia().setText("Puntarenas");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+
+                    }
+                    if (Coordenadas[10].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia1.jpg");
+                        vista.getTextFieldProvincia().setText("San José");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+
+                    }
+                    if (Coordenadas[11].contains(mouseX, mouseY)) {
+                        vista.setearRuta("src/map/provincia6.jpg");
+                        vista.getTextFieldProvincia().setText("Puntarenas");
+                        vista.matchProvincias();
+                        vista.cantonesMatchDistritos();
+
+                    }
+                }else{
+                    verdad=false;
                 }
             }
 
@@ -151,7 +182,10 @@ public class Controlador {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                //seleccionArea(e);
+                if(!verdad) {
+                    vista.seleccionArea(e);
+                    verdad=true;
+                }
             }
         });
     }
@@ -253,73 +287,6 @@ public class Controlador {
 
     }
 
-    public void seleccionArea(MouseEvent event) {
-        Rectangle[] Coordenadas = vista.creaCoordenada();
-
-        int mouseX = event.getX();
-        int mouseY = event.getY();
-
-        Coordenadas[0] = new Rectangle(234, 62, 29, 53);
-        Coordenadas[1] = new Rectangle(257, 142, 30, 23);
-        Coordenadas[2] = new Rectangle(66, 75, 79, 38);
-        Coordenadas[3] = new Rectangle(157, 42, 62, 36);
-        Coordenadas[4] = new Rectangle(269, 97, 49, 30);
-        Coordenadas[5] = new Rectangle(315, 171, 57, 28);
-        Coordenadas[6] = new Rectangle(119, 139, 19, 23);
-        Coordenadas[7] = new Rectangle(295, 229, 80, 34);
-        Coordenadas[8] = new Rectangle(195, 148, 48, 23);
-        Coordenadas[9] = new Rectangle(160, 113, 10, 10);
-        Coordenadas[10] = new Rectangle(274, 187, 20, 30);
-        Coordenadas[11] = new Rectangle(220, 180, 10, 10);
-
-        if (Coordenadas[0].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia4.jpg");
-            ;
-        }
-        if (Coordenadas[1].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia3.jpg");
-            ;
-        }
-        if (Coordenadas[2].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia5.jpg");
-            ;
-        }
-        if (Coordenadas[3].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia2.jpg");
-            ;
-        }
-        if (Coordenadas[4].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia7.jpg");
-            ;
-        }
-        if (Coordenadas[5].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia7.jpg");
-            ;
-        }
-        if (Coordenadas[6].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia6.jpg");
-            ;
-        }
-        if (Coordenadas[7].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia6.jpg");
-            ;
-        }
-        if (Coordenadas[8].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia1.jpg");
-            ;
-        }
-        if (Coordenadas[9].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia6.jpg");
-        }
-        if (Coordenadas[10].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia1.jpg");
-        }
-        if (Coordenadas[11].contains(mouseX, mouseY)) {
-            vista.setearRuta("src/map/provincia6.jpg");
-        }
-
-    }
-
     public class Listener implements ActionListener {
 
         @Override
@@ -336,53 +303,5 @@ public class Controlador {
         }
     }
 
-    public void matchProvincias() {
 
-        String control = vista.getTextFieldPrrovincia().getText();
-        switch (control) {
-            case "San José" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(1).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Alajuela" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(2).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Cartago" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(3).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Heredia" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(4).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Guanacaste" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(5).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Puntarenas" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(6).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-            case "Limón" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(7).nombresCantones();
-                vista.agregarComboCanton(stringArrayList);
-            }
-        }
-    }
-
-    public void cantonesMatchDistritos() {
-//        ArrayList<String> distritosList = new ArrayList<>();
-//        String canton = (String) vista.getCantonesCombo();
-//        for (int j = 0; j < 7; j++) {
-//            ArrayList<String> stringArrayList = Servicio.(j + 1).nombreCantones();
-//            for (int i = 0; i < stringArrayList.size(); i++) {
-//                if (Objects.equals(stringArrayList.get(i), canton)) {
-//                    distritosList = dataProvincias.buscaProvincia(j + 1).buscaCantones(i + 1).nombreDistritos();// error linea 77
-//                }
-//            }
-//        }
-//        ventanaPrincipal.comboBoxDistritos(distritosList);
-//    }
-    }
 }

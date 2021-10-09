@@ -4,6 +4,8 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import logic.Cliente;
+import logic.Pago;
+import logic.Prestamo;
 import logic.Provincia;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +15,30 @@ import java.util.List;
 public class Data {
     private List<Cliente> clientes;
     private List<Provincia> provincias;
+    private List<Prestamo> prestamos;
+    private List<Pago> pagos;
+
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public List<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Pago> pagos) {
+        this.pagos = pagos;
+    }
 
     public Data() {
         clientes = new ArrayList<>();
         provincias = new ArrayList<>();
+        prestamos=new ArrayList<>();
+        pagos=new ArrayList<>();
     }
 
     public List<Cliente> getClientes() {
@@ -45,6 +67,20 @@ public class Data {
         String str="";
         for(int i=0;i<clientes.size();i++){
             str+=clientes.toString()+"\n";
+        }
+        return str;
+    }
+    public String mostrarPrestamos(){
+        String str="";
+        for(int i=0;i<prestamos.size();i++){
+            str+=prestamos.toString()+"\n";
+        }
+        return str;
+    }
+    public String mostrarPagos(){
+        String str="";
+        for(int i=0;i<pagos.size();i++){
+            str+=pagos.toString()+"\n";
         }
         return str;
     }

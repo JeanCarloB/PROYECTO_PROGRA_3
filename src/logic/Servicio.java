@@ -2,14 +2,6 @@ package logic;
 
 import data.Data;
 import data.XMLPersister;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +27,15 @@ public class Servicio {
             datos = new Data();
         }
     }
-
+    public Provincia buscarProvincia(int pos){
+        Provincia prod=null;
+        for(int i=0;i< getProvincias().size();i++){
+            if(i==pos){
+                prod= getProvincias().get(i);
+            }
+        }
+        return prod;
+    }
 
     public String toStringClientes(){
         return datos.mostrarClientes();
@@ -50,11 +50,13 @@ public class Servicio {
         return result;
     }
 
+
     public Cliente clienteGet(String cedula) throws Exception{
         Cliente result=datos.getClientes().stream().filter(c->c.getId().equals(cedula)).findFirst().orElse(null);
         if (result!=null) return result;
         else throw new Exception("Cliente no existe");
     }
+
 
 
     public List<Provincia> provinciasGetList(){
@@ -101,5 +103,19 @@ public class Servicio {
             //System.out.println("no se guardo");
         }
     }
-
+    public List<Pago> getPagos(){
+        return datos.getPagos();
+    }
+    public List<Prestamo> getPrestamos(){
+        return datos.getPrestamos();
+    }
+    public List<Prestamo> getPrestamosPorCliente(String p){
+        List<Prestamo> prod=null;
+        for(int i=0;i< getClientes().size();i++){
+            if(getClientes().get(i).getId().equals(p)){
+                prod=getClientes().get(i).listaPrestamos;
+            }
+        }
+        return prod;
+    }
 }

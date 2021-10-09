@@ -58,5 +58,12 @@ public class Canton {
     public void setListaDistritos(List<Distrito> listaDistritos) {
         this.listaDistritos = listaDistritos;
     }
+    public ArrayList<String> nombresDistritos(){
+        ArrayList<String> listadistritos=new ArrayList<>();
+        for(int i=0;i< listaDistritos.size();i++){
+            listadistritos.add(listaDistritos.get(i).getNombre());
+        }
+        return listadistritos;
+    }
 
 }
