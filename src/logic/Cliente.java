@@ -4,6 +4,9 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlID;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Cliente {
 @XmlID
@@ -12,7 +15,7 @@ public class Cliente {
     private String provincia;
     private String canton;
     private String distrito;
-
+    List<Prestamo> listaPrestamos;
 
     public Cliente() {
         this.id = "";
@@ -20,6 +23,15 @@ public class Cliente {
         this.provincia = "";
         this.canton = "";
         this.distrito = "";
+        listaPrestamos=new ArrayList<>();
+    }
+
+    public List<Prestamo> getListaPrestamos() {
+        return listaPrestamos;
+    }
+
+    public void setListaPrestamos(List<Prestamo> listaPrestamos) {
+        this.listaPrestamos = listaPrestamos;
     }
 
     public Cliente(String id, String nombre, String provincia, String canton, String distrito) {
@@ -28,6 +40,7 @@ public class Cliente {
         this.provincia = provincia;
         this.canton = canton;
         this.distrito = distrito;
+        listaPrestamos=new ArrayList<>();
     }
 
     public String getId() {

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -169,7 +170,15 @@ public class Vista extends JFrame implements Observer {
         this.setVisible(true);
     }
 
-
+    public JTextField getTextFieldPrrovincia(){
+        return opcionesProvincias;
+    }
+    public String getCantonesCombo(){
+        return (String) opcionesCanton.getSelectedItem();
+    }
+    public String getDistritoCombo(){
+        return (String) opcionesDistrito.getSelectedItem();
+    }
     @Override
     public void update(Observable o, Object arg) {
         Cliente cliente = modelo.getCliente();
@@ -224,12 +233,18 @@ public class Vista extends JFrame implements Observer {
         ImageIcon iconaux=new ImageIcon(path);
         imagen.setIcon(iconaux);
     }
-    public void agregarComboCanton(String nom){
-        opcionesCanton.addItem(nom);
+    public void agregarComboCanton(ArrayList<String> lista){
+        opcionesCanton.removeAllItems();
+        for(String canton:lista){
+            opcionesCanton.addItem(canton);
+        }
     }
 
-    public void agregarComboDistrito(String nom){
-        opcionesDistrito.addItem(nom);
+    public void agregarComboDistrito(ArrayList<String> lista){
+        opcionesDistrito.removeAllItems();
+        for(String distrito:lista){
+            opcionesDistrito.addItem(distrito);
+        }
     }
     public void agregarCliente(){
         try{
