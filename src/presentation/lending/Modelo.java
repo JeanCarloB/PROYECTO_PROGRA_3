@@ -84,7 +84,7 @@ public class Modelo extends Observable {
         refresh();
     }
 
-    private void refresh() {
+    public void refresh() {
         cliente=new Cliente();
         pago=new Pago();
         nuevoPrestamo=new Prestamo();

@@ -27,7 +27,7 @@ public class Controlador {
         vista.addActionListenerCombo(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("Action listener");
+                //vista.matchProvincias();
                 vista.cantonesMatchDistritos();
             }
         });
@@ -36,7 +36,7 @@ public class Controlador {
         vista.addMouseListenerImagen(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(verdad) {
+
                     Rectangle[] Coordenadas = vista.creaCoordenada();
 
                     int mouseX = e.getX();
@@ -130,9 +130,7 @@ public class Controlador {
                         vista.cantonesMatchDistritos();
 
                     }
-                }else{
-                    verdad=false;
-                }
+
             }
 
             @Override
@@ -164,10 +162,10 @@ public class Controlador {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                if(!verdad) {
+
                     vista.seleccionArea(e);
                     verdad=true;
-                }
+
             }
         });
     }

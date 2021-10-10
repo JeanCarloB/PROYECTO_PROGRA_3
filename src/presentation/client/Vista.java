@@ -97,7 +97,7 @@ public class Vista extends JFrame implements Observer {
         panel1.setBackground(new Color(176, 196, 222));
 
         JPanel panelP=new JPanel(new BorderLayout());
-        panelP.        setBackground(new Color(176, 196, 222));
+        panelP.setBackground(new Color(176, 196, 222));
 
         cedula=new JLabel("Cedula");
         nombre=new JLabel("Nombre");
@@ -114,11 +114,10 @@ public class Vista extends JFrame implements Observer {
         panel.add(botonBuscar);
         panel1.add(nombre);
         panel1.add(textoNombre);
-        // panel.setBorder(new EmptyBorder(10,10,10,10));
         panelP.add(panel,BorderLayout.NORTH);
         panelP.add(panel1,BorderLayout.WEST);
         contentPane.add(panelP,BorderLayout.NORTH);
-        //
+
         ImageIcon imagenBotonGuardar=new ImageIcon("src/map/save.png");
         JPanel panel2=new JPanel(new GridLayout(2,4,2,2));
         panel2.setBackground(new Color(176, 196, 222));
@@ -126,7 +125,7 @@ public class Vista extends JFrame implements Observer {
 
 
         JPanel panelP2=new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelP2.        setBackground(new Color(176,196,222));
+        panelP2.setBackground(new Color(176,196,222));
 
         provincia=new JLabel("Provincia");
 
@@ -269,21 +268,7 @@ public class Vista extends JFrame implements Observer {
             opcionesDistrito.addItem(distrito);
         }
     }
-    public void agregarCliente(){
-        try{
-            if(textoCedula.getText().isEmpty()||textoNombre.getText().isEmpty()||opcionesProvincias.getText().isEmpty()||getOpcionesCanton().isEmpty()||getOpcionesDistrito().isEmpty())return;
-            Cliente cliente;
-            cliente = new Cliente();
-            cliente.setId(textoCedula.getText());
-            cliente.setNombre(textoNombre.getText());
-            cliente.setProvincia(opcionesProvincias.getText());
-            cliente.setCanton(getOpcionesCanton());
-            cliente.setDistrito(getOpcionesDistrito());
-           // controlador.agregar(cliente);
-        } catch (Exception e) {
-            mensajeError("No se puede agregar");
-        }
-    }
+
 
     public void addMouseListenerImagen(MouseListener trackerImagen) {
         imagen.addMouseListener(trackerImagen);
@@ -324,6 +309,7 @@ public class Vista extends JFrame implements Observer {
     }
 
     public void cantonesMatchDistritos() {
+        opcionesDistrito.removeAllItems();
         ArrayList<String> distritosList = new ArrayList<>();
         String canton = (String) getCantonesCombo();
         for (int j = 0; j < 7; j++) {
@@ -335,6 +321,7 @@ public class Vista extends JFrame implements Observer {
                 }
             }
         }
+        //System.out.println(distritosList.toString());
         agregarComboDistrito(distritosList);
     }
     public void seleccionArea(MouseEvent event) {

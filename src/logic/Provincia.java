@@ -63,7 +63,6 @@ public class Provincia {
         ArrayList<String> listacantones=new ArrayList<>();
         for(int i=0;i< listaCantones.size();i++){
             listacantones.add(listaCantones.get(i).getNombre());
-            System.out.println(listaCantones.get(i).getNombre());
         }
         return listacantones;
     }
