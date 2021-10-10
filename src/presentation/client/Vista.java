@@ -1,5 +1,6 @@
 package presentation.client;
 
+import data.ListaProvincia;
 import logic.Cliente;
 import logic.Servicio;
 
@@ -278,31 +279,31 @@ public class Vista extends JFrame implements Observer {
         String control = getTextFieldProvincia().getText();
         switch (control) {
             case "San José" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(0).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(0).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Alajuela" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(1).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(1).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Cartago" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(2).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(2).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Heredia" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(3).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(3).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Guanacaste" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(4).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(4).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Puntarenas" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(5).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(5).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
             case "Limón" -> {
-                ArrayList<String> stringArrayList = Servicio.instance().provinciasGetList().get(6).nombresCantones();
+                ArrayList<String> stringArrayList = ListaProvincia.instance().getProvincias().get(6).nombresCantones();
                 agregarComboCanton(stringArrayList);
             }
         }
@@ -313,10 +314,10 @@ public class Vista extends JFrame implements Observer {
         ArrayList<String> distritosList = new ArrayList<>();
         String canton = (String) getCantonesCombo();
         for (int j = 0; j < 7; j++) {
-            ArrayList<String> nombresCantones = Servicio.instance().getProvincias().get(j).nombresCantones();
+            ArrayList<String> nombresCantones = ListaProvincia.instance().getProvincias().get(j).nombresCantones();
             for (int i = 0; i < nombresCantones.size(); i++) {
                 if (nombresCantones.get(i).equals(canton)) {
-                    distritosList = Servicio.instance().buscarProvincia(j).getListaCantones().get(i).nombresDistritos();// error linea 77
+                    distritosList = ListaProvincia.instance().getProvincias().get(j).getListaCantones().get(i).nombresDistritos();// error linea 77
 
                 }
             }

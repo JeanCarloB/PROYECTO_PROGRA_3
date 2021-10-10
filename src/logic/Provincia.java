@@ -58,7 +58,9 @@ public class Provincia {
     public void addCanton(Canton canton) {
         listaCantones.add(canton);
     }
-
+    public static List<Distrito> getLista(){
+        return getLista();
+    }
     public ArrayList<String> nombresCantones(){
         ArrayList<String> listacantones=new ArrayList<>();
         for(int i=0;i< listaCantones.size();i++){

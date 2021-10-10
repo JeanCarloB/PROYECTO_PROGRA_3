@@ -11,13 +11,18 @@ public class Canton {
     private String numero;
     private String nombre;
     List<Distrito> listaDistritos;
-
+    private static Canton instance=null;
+    public static Canton instance(){
+        if(instance == null){
+            instance = new Canton();
+        }
+        return instance;
+    }
     public Canton(String numero, String nombre) {
         this.numero = numero;
         this.nombre = nombre;
         listaDistritos=new ArrayList<>();
     }
-
     public Canton() {
         this.nombre = "";
         this.nombre = "";

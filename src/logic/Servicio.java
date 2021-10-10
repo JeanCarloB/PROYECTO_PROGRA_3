@@ -1,8 +1,13 @@
 package logic;
 
 import data.Data;
+import data.ListaProvincia;
 import data.XMLPersister;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Servicio {
@@ -36,6 +41,7 @@ public class Servicio {
         }
         return prod;
     }
+
 
     public String toStringClientes(){
         return datos.mostrarClientes();
@@ -118,4 +124,28 @@ public class Servicio {
         }
         return prod;
     }
+
+    public void setProvincias(List<Provincia> provincia) {
+        datos.setProvincias(provincia);
+    }
+    public void setCantones(List<Canton> lista){
+        for(int i=0;i<datos.getProvincias().size();i++){
+            for(int j=0;j<lista.size();j++){
+                datos.getProvincias().get(i).addCanton(lista.get(j));
+            }
+        }
+    }
+
+    public void filter(List<Distrito> listaD) {
+        for(int i=0;i<7;i++){
+            System.out.println(datos.getProvincias().get(i).toString());
+            for(int j=0;j<datos.getProvincias().get(i).getListaCantones().size();j++){
+                //System.out.println(datos.getProvincias().get(i).getListaCantones().get(j).toString());
+                for(int k=0;k< listaD.size();k++){
+                        datos.getProvincias().get(i).getListaCantones().get(i).addDistrito(listaD.get(i));
+                    }
+                }
+            }
+        }
+
 }

@@ -39,7 +39,6 @@ public class Distrito {
     {
         numero = num;
     }
-
     @Override
     public String toString() {
         return "Distrito{" +

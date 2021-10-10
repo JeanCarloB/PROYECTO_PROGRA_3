@@ -1,10 +1,14 @@
 package presentation.main_window;
 
+import data.ListaProvincia;
+import logic.JAXB;
+import logic.Provincia;
 import logic.Servicio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 
 public class Controlador {
@@ -20,7 +24,7 @@ public class Controlador {
     presentation.lending.Vista vistaPrestamo;
     presentation.lending.Controlador controladorPrestamo;
 
-    public Controlador(Modelo modelo,Vista vista) {
+    public Controlador(Modelo modelo,Vista vista) throws Exception {
         this.modelo = modelo;
         this.vista = vista;
         init();
@@ -28,7 +32,8 @@ public class Controlador {
         vistaCliente.agregarListener(new ClassAction());
         vistaPrestamo.agregarListener(new ClassAction());
         vistaPago.agregarListener(new ClassAction());
-        data.XMLPersister.instance().read();
+        JAXB jaxb=new JAXB();
+        data.ListaProvincia.instance().setProvincias(jaxb.unmarshall().getProvincias());
        // System.out.println(Servicio.instance().getProvincias().get(0).getListaCantones().get(0).nombresDistritos());
         //System.out.println( logic.Servicio.getInstance().getListaProvincias());
     }
